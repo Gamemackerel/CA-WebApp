@@ -2,7 +2,7 @@ var DEFAULT_RULES;
 var DEFAULT_ENVSIZE;
 var DEFAULT_SEED;
 var DEFAULT_TEMPO;
-
+var DEFAULT_MUSICAL_SCALE;
 
 var SCALE;
 var CANVAS_WIDTH;
@@ -10,7 +10,7 @@ var CANVAS_HEIGHT;
 
 
 var ca;
-var caGraphics
+var caGraphics;
 
 var scroller = 0;
 var loaded = false;
@@ -28,11 +28,13 @@ function setup() {
   
   
   //initializing global vars
-  DEFAULT_RULES = new Array(0, 0, 0, 1, 1, 0, 1, 0);
-  DEFAULT_ENVSIZE = 40;
-  DEFAULT_SEED = new Array(30, 30); //for some reason putting only 1 seed in does not create the array so you have to put it in twice
-  DEFAULT_TEMPO = 5; //beats / sec
-  DEFAULT_SCALE = [0, 3, 5, 6, 7, 10]; //blues
+  DEFAULT_RULES = [0, 0, 0, 1, 1, 0, 1, 0];
+  DEFAULT_ENVSIZE = 31;
+  DEFAULT_SEED = [15]; 
+  DEFAULT_TEMPO = 20; //beats / sec
+  DEFAULT_MUSICAL_SCALE = [1, 3, 6, 9, 11] // minor
+  //[1, 3, 4, 6, 8, 9, 11] // minor
+  //[0, 3, 5, 6, 7, 10]; //blues
 
   SCALE = 4;
 
@@ -116,14 +118,15 @@ function CA(rules, seed, enviroSize) {
     var index = 0;
     for(var i = 0; i < cells.length; i++) {
       if(cells[i] == 1) {
-        pitches[index++] = this.scaleMap(i + 21, DEFAULT_SCALE);
+        pitches[index++] = this.scaleMap(i + 18, DEFAULT_MUSICAL_SCALE);
       }
     }
     print(pitches);
     MIDI.setVolume(0, 127);
 		MIDI.chordOn(0, pitches, 70, 0);
 		MIDI.chordOff(0, pitches, .1);
-
+    //                         ^ this is the duration of chord
+    //                          it should ideally adjust with tempo
   }
   
   //mode is "scale" array
