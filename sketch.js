@@ -13,43 +13,63 @@ var ca;
 var caGraphics
 
 var scroller = 0;
-
+var loaded = false;
 
 function setup() {
+  
+	MIDI.loadPlugin({
+		soundfontUrl: "./soundfont/",
+		instrument: "acoustic_grand_piano", // or multiple instruments
+		onsuccess: function() {
+		  loaded = true;
+  		}
+	});
+  
+  
+  
   //initializing global vars
   DEFAULT_RULES = new Array(0, 0, 0, 1, 1, 0, 1, 0);
-  DEFAULT_ENVSIZE = 80;
-  DEFAULT_SEED = new Array(1, 1); //for some reason putting only 1 seed in does not create the array so you have to put it in twice
-  DEFAULT_TEMPO = 2; //beats / sec
-  
-  CANVAS_WIDTH = windowWidth;
-  CANVAS_HEIGHT = windowHeight;
-  SCALE = 8;
+  DEFAULT_ENVSIZE = 40;
+  DEFAULT_SEED = new Array(30, 30); //for some reason putting only 1 seed in does not create the array so you have to put it in twice
+  DEFAULT_TEMPO = 5; //beats / sec
+  DEFAULT_SCALE = [0, 3, 5, 6, 7, 10]; //blues
+
+  SCALE = 4;
+
+  CANVAS_WIDTH = SCALE * DEFAULT_ENVSIZE * 2;
+  CANVAS_HEIGHT = 300;
   
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
   background(240);
   frameRate(DEFAULT_TEMPO);
   
-  caGraphics = createGraphics(CANVAS_WIDTH, CANVAS_HEIGHT);
+  caGraphics = createGraphics(CANVAS_WIDTH, 10000);
   
   ca = new CA(DEFAULT_RULES, DEFAULT_SEED, DEFAULT_ENVSIZE); //how do I initialie this?
 }
 
 function draw() {
   
-  clear();
-  
-  ca.render(); // Draw the current gen's cells and plays a chord
-  ca.reRender(); // reDraw the previous gens cells without a highlight
-  ca.generate(); // Generate the state values for next frame
-  
-  //draws a "highlight" rectangle on the level currently being played/rendered
-  caGraphics.fill(0, 100, 0 , 50);
-  caGraphics.rect(0, generation * SCALE - SCALE, 640, SCALE)
-  
-  scroller -= 2 * SCALE;
-  image(caGraphics, 0, CANVAS_HEIGHT / 2 + scroller);
-  
+  if(loaded) {
+    
+    clear();
+    
+    ca.render(); // Draw the current gen's cells and plays a chord
+    ca.reRender(); // reDraw the previous gens cells without a highlight
+    ca.generate(); // Generate the state values for next frame
+    
+    //draws a "highlight" rectangle on the level currently being played/rendered
+    caGraphics.fill(0, 100, 0 , 50);
+    caGraphics.rect(0, generation * SCALE - SCALE, SCALE * DEFAULT_ENVSIZE, SCALE)
+    
+    
+    if(generation * SCALE >= CANVAS_HEIGHT / 2) {
+      scroller -= 2 * SCALE;
+      image(caGraphics, 0, scroller, 0, 0);
+    } else {
+      image(caGraphics, 0, 0);
+    }
+  }  
 }
 
 function CA(rules, seed, enviroSize) {
@@ -92,8 +112,27 @@ function CA(rules, seed, enviroSize) {
   }
 
   this.playChord = function() {
+    var pitches = [];
+    var index = 0;
+    for(var i = 0; i < cells.length; i++) {
+      if(cells[i] == 1) {
+        pitches[index++] = this.scaleMap(i + 21, DEFAULT_SCALE);
+      }
+    }
+    print(pitches);
+    MIDI.setVolume(0, 127);
+		MIDI.chordOn(0, pitches, 70, 0);
+		MIDI.chordOff(0, pitches, .1);
 
   }
+  
+  //mode is "scale" array
+  this.scaleMap = function(pitch, mode) {
+    var octave = Math.floor(pitch / (mode.length + 1)) * 12;  
+    var offset = round(mode[(pitch - 1) % (mode.length)]);
+    return offset + octave;
+  }
+  
   
   //the purpose of this function is to use the stored lastGen cell states and redraw the last generation 
   //over what is currently on the canvas to get rid of the highlight
@@ -138,8 +177,8 @@ function CA(rules, seed, enviroSize) {
       nextgen[i] = this.executeRules(left, me, right); // Compute next generation state based on ruleset
     }
     // Copy the array into current value
-    for (var i = 1; i < cells.length - 1; i++) {
-      cells[i] = nextgen[i];
+    for (var j = 1; j < cells.length - 1; j++) {
+      cells[j] = nextgen[j];
     }
       generation++;
   }
