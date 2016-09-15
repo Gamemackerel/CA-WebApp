@@ -28,15 +28,15 @@ function setup() {
   
   
   //initializing global vars
-  DEFAULT_RULES = [0, 0, 0, 1, 1, 0, 1, 0];
-  DEFAULT_ENVSIZE = 31;
-  DEFAULT_SEED = [15]; 
-  DEFAULT_TEMPO = 20; //beats / sec
-  DEFAULT_MUSICAL_SCALE = [1, 3, 6, 9, 11] // minor
+  DEFAULT_RULES = [1, 0, 0, 1, 1, 0, 1, 0];
+  DEFAULT_ENVSIZE = 20;
+  DEFAULT_SEED = [1]; 
+  DEFAULT_TEMPO = 5; //beats / sec
+  DEFAULT_MUSICAL_SCALE = [1,3,5,8] // minor
   //[1, 3, 4, 6, 8, 9, 11] // minor
   //[0, 3, 5, 6, 7, 10]; //blues
 
-  SCALE = 4;
+  SCALE = 8;
 
   CANVAS_WIDTH = SCALE * DEFAULT_ENVSIZE * 2;
   CANVAS_HEIGHT = 300;
@@ -66,7 +66,7 @@ function draw() {
     
     
     if(generation * SCALE >= CANVAS_HEIGHT / 2) {
-      scroller -= 2 * SCALE;
+      scroller -= SCALE;
       image(caGraphics, 0, scroller, 0, 0);
     } else {
       image(caGraphics, 0, 0);
