@@ -1,0 +1,16 @@
+#parameter-inputs {
+	background-color: #bababa;
+	border: 5px solid #cdd2d8;
+	color: white;
+	width: 30%;
+	min-width: 200px;
+	float: left;
+}
+
+span {
+	color: black;
+	font-size: 12pt;
+	font-weight: bold;
+	padding: 0px;
+	margin: 0px;
+}
