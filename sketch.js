@@ -67,7 +67,6 @@ this.startAutomaton = function()
 	var musicScaleInput = document.getElementById('MUSICSCALE').value.trim().split(",");
 	var renderFix = document.getElementById('ZOOM').checked;
 
-
 	if(renderFix) {
 		DISP_MOD = 2;
 	} else {
@@ -86,12 +85,12 @@ this.startAutomaton = function()
 	}
 
 	SEED = [];
-	for (var i = 0; i < rulesInput.length; i++) {
+	for (var i = 0; i < seedInput.length; i++) {
 		SEED[i] = parseInt(seedInput[i], 10);
 	}
 
 	MUSICAL_SCALE = [];
-	for (var i = 0; i < rulesInput.length - 1; i++) {
+	for (var i = 0; i < musicScaleInput.length - 1; i++) {
 		MUSICAL_SCALE[i] = parseInt(musicScaleInput[i], 10);
 	}  
 	// //initializing global vars manually (no user input)
@@ -178,10 +177,10 @@ function CA(rules, seed, enviroSize) {
 
     var octave = Math.floor(pitch / (mode.length + 1));
     octave %= 6;
-    octave += 3;
+    octave += 2;
     var offset = round(mode[(pitch) % (mode.length)]);
     var newPitch = (offset + octave * 12);
-    return newPitch;
+	return newPitch;
   }
   
   
