@@ -90,7 +90,7 @@ this.startAutomaton = function()
 	}
 
 	MUSICAL_SCALE = [];
-	for (var i = 0; i < musicScaleInput.length - 1; i++) {
+	for (var i = 0; i < musicScaleInput.length; i++) {
 		MUSICAL_SCALE[i] = parseInt(musicScaleInput[i], 10);
 	}  
 	// //initializing global vars manually (no user input)
@@ -163,8 +163,8 @@ function CA(rules, seed, enviroSize) {
     }
     print(pitches);
     MIDI.setVolume(0, 127);
-		MIDI.chordOn(0, pitches, 70, 0);
-		MIDI.chordOff(0, pitches, .5);
+	MIDI.chordOn(0, pitches, 70, 0);
+	MIDI.chordOff(0, pitches, 1 / TEMPO);
     //                         ^ this is the duration of chord
     //                          it should ideally adjust with tempo
   }
