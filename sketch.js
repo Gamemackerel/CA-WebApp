@@ -166,7 +166,6 @@ function CA(rules, seed, enviroSize) {
 	MIDI.chordOn(0, pitches, 70, 0);
 	MIDI.chordOff(0, pitches, 1 / TEMPO);
     //                         ^ this is the duration of chord
-    //                          it should ideally adjust with tempo
   }
   
   //mode is "scale" array
@@ -176,7 +175,7 @@ function CA(rules, seed, enviroSize) {
 
 
     var octave = Math.floor(pitch / (mode.length + 1));
-    octave %= 6;
+    octave %= 7;
     octave += 2;
     var offset = round(mode[(pitch) % (mode.length)]);
     var newPitch = (offset + octave * 12);
