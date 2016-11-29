@@ -2,6 +2,11 @@ body {
 	overflow: auto;
 }
 
+
+input {
+	width: 20em;
+}
+
 #parameter-inputs {
 	padding: 10px;
 	width: 30%;
@@ -40,3 +45,4 @@ span {
 label {
 	color: black;
 }
+

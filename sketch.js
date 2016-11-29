@@ -29,6 +29,13 @@ function setup() {
 	this.startAutomaton();
 }
 
+
+//TODO: turn this draw function into a normal method that is
+//called on a user specified time interval using a java timer.
+//This way the tempo won't be tied to the frame rate and it can be made
+//to go much faster with the user inputing a bpm unit 
+//instead of fps (lower limit: 1fps).
+//the timer will be initialized in the startAutomaton function
 function draw() {
   
 
@@ -53,8 +60,6 @@ function draw() {
     }
   }  
 }
-
-
 
 this.startAutomaton = function()
 {
@@ -105,7 +110,7 @@ this.startAutomaton = function()
 
 	createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
 	background(240);
-	frameRate(TEMPO);
+	frameRate(TEMPO); ////MAJOR ISSUE: switch to timer interval function
 
 	caGraphics = createGraphics(CANVAS_WIDTH, 10000);
 
@@ -157,7 +162,6 @@ function CA(rules, seed, enviroSize) {
     var index = 0;
     for(var i = 0; i < cells.length; i++) {
       if(cells[i] == 1) {
-      	//
         pitches[index++] = this.scaleMap(i, MUSICAL_SCALE);
       }
     }
