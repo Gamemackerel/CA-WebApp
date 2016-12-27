@@ -7,6 +7,6 @@ It's easier to explain by showing than it is by telling:
 
 
 I built this website using the [p5js Javascript library](https://p5js.org/). This made it a smooth transition when I wanted to port important parts from my 'proof of concept version' that was built in processing, but it also has created some incredibly frustrating issues. 
-I will be the first to admit that I haven't been able to tackle the issues born from how I implemented p5js in the best possible way (looking at the render-glitch-fix checkbox). I also managed to make the UI seem as though it was styled by a Caveman. In my defense, this was the first website I've made, and essentially my first real programming project. 
+I will be the first to admit that I haven't been able to tackle the issues born from how I implemented p5js in the best possible way (looking at the render-glitch-fix checkbox). I'll also admit that the UI looks as though it was designed by a caveman. In my defense, this was the first website I've made, and essentially my first real programming project. 
 
 Since finsishing the Music Generator I have gotten a much stronger grasp on web technologies like HTML/CSS/Javascript; The project is definitely due for a complete rebuild from the ground up, and p5js need not be apart of it.
