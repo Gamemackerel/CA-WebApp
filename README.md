@@ -1,7 +1,7 @@
 #Cellular Automaton Music Generator
 
-This Javascript Music webapp uses a [1 dimensional Cellular Automaton](http://mathworld.wolfram.com/ElementaryCellularAutomaton.html) to produce piano music. 
-The generator concept is simple. Each generation is mapped onto a keyboard wherein each live cell represents a played piano note. Thus each generation thus will correspond to a single chord, and the succession of multiple generations will represent a sequence of chords.
+This Javascript Music webapp uses a simple [one-dimensional Cellular Automaton](http://mathworld.wolfram.com/ElementaryCellularAutomaton.html) to produce piano music. 
+The generator concept is straightforward. Each generation is mapped onto a keyboard wherein each live cell represents a played piano note. Thus each generation thus will correspond to a single chord, and the succession of multiple generations will represent a sequence of chords.
 It's easier to explain by showing than it is by telling:
 ##[Try it out!](http://students.washington.edu/abemill/CA/)
 
