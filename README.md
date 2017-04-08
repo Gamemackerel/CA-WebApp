@@ -3,7 +3,7 @@
 This Javascript Music webapp uses a simple [one-dimensional Cellular Automaton](http://mathworld.wolfram.com/ElementaryCellularAutomaton.html) to produce piano music. 
 The generator concept is straightforward. Each generation is mapped onto a keyboard wherein each live cell represents a played piano note. Thus each generation thus will correspond to a single chord, and the succession of multiple generations will represent a sequence of chords.
 It's easier to explain by showing than it is by telling:
-##[Try it out!](http://students.washington.edu/abemill/CA/)
+## [Try it out!](http://students.washington.edu/abemill/CA/)
 
 
 I built this website using the [p5js Javascript library](https://p5js.org/). This made it a smooth transition when I wanted to port important parts from my 'proof of concept version' that was built in processing, but it also has created some incredibly frustrating issues. 
